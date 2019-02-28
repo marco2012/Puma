@@ -1,7 +1,6 @@
 THEOS_PLATFORM_DEB_COMPRESSION_LEVEL = 6
 
 ARCHS = armv7 arm64
-# export TARGET = iphone:clang:latest:8.0
 
 include $(THEOS)/makefiles/common.mk
 
