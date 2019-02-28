@@ -33,6 +33,34 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>me.vikings.puma</string>
+			<key>key</key>
+			<string>trombare</string>
+			<key>label</key>
+			<string>Ma come faccio a non trombare</string>
+			<key>postNotification</key>
+			<string>me.vikings.puma/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>me.vikings.puma</string>
+			<key>key</key>
+			<string>paura</string>
+			<key>label</key>
+			<string>Dipre Paura</string>
+			<key>postNotification</key>
+			<string>me.vikings.puma/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Puma © 2019</string>

@@ -1,6 +1,7 @@
 THEOS_PLATFORM_DEB_COMPRESSION_LEVEL = 6
 
 ARCHS = armv7 arm64
+DEBUG = 1
 
 include $(THEOS)/makefiles/common.mk
 
