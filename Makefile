@@ -1,7 +1,9 @@
 THEOS_PLATFORM_DEB_COMPRESSION_LEVEL = 6
 
-ARCHS = armv7 arm64
+# ARCHS = armv7 arm64
+ARCHS = x86_64
 DEBUG = 1
+TARGET = simulator:clang::7.0
 
 include $(THEOS)/makefiles/common.mk
 
