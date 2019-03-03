@@ -46,6 +46,7 @@ static void loadPrefs() {
 
 %new // hey lets make a new void 
 -(void)tapping {
+    loadPrefs();
     if (enabled) {
         notify_post("me.vikings.puma"); 
     }
@@ -71,13 +72,20 @@ static void startPuma(NSString* title, NSString* audio) {
     NSString *randomMessage = [moodArray objectAtIndex:arc4random()%[moodArray count]];
     
     //display alert
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
-        message: randomMessage
-        delegate:nil 
-        cancelButtonTitle:@"💥💥💥" 
-        otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    UIAlertController* alert=   [UIAlertController
+                                    alertControllerWithTitle: title
+                                    message:randomMessage
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancel = [UIAlertAction
+                         actionWithTitle:@"💥💥💥"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                            //action                             
+                         }];
+    [alert addAction:cancel]; 
+
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil]; //https://www.reddit.com/r/jailbreakdevelopers/comments/5xv9yo/replacing_deprecated_uiactionsheet_with/
 
     //play audio
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat: @"/var/mobile/Library/Puma/%@.aiff", audio]];
@@ -114,6 +122,18 @@ static void startPuma(NSString* title, NSString* audio) {
             } else if ([randomAction isEqual:@"belino"]) {
                 startPuma(@"🐯ME NE SBATTO IL BELINO🐯", @"belino");
             } 
+ 
+            // if([randomAction isEqual:@"esplodo"]){
+            //     startPuma(@"🐯ESPLODOOO🐯", @"esplodo");
+            // } else if ([randomAction isEqual:@"passi"]) {
+            //     startPuma(@"🐯VADO GIU PERPENDICOLARE🐯", @"passi");
+            // } else if ([randomAction isEqual:@"paura"]) {
+            //     startPuma(@"🐯DIPRE PAURA🐯", @"paura");
+            // } else if ([randomAction isEqual:@"trombare"]) {
+            //     startPuma(@"🐯MA COME FACCIO A NON TROMBARE CO STO FISICO🐯", @"trombare");
+            // } else if ([randomAction isEqual:@"belino"]) {
+            //     startPuma(@"🐯ME NE SBATTO IL BELINO🐯", @"belino");
+            // } 
 
 		});
 	}
