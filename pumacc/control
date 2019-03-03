@@ -1,0 +1,9 @@
+Package: me.vikings.pumacc
+Name: pumacc
+Depends: mobilesubstrate, com.opa334.ccsupport
+Version: 1.0
+Architecture: iphoneos-arm
+Description: An awesome Control Center module!
+Maintainer: Marco
+Author: Marco
+Section: Control Center (Modules)

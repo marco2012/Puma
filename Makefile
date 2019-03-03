@@ -1,6 +1,8 @@
 THEOS_PLATFORM_DEB_COMPRESSION_LEVEL = 6
 
-ARCHS = armv7 arm64
+# ARCHS = armv7 arm64
+export TARGET = iphone:clang:11.2:11.0
+export ARCHS = arm64
 # ARCHS = x86_64
 # DEBUG = 1
 # TARGET = simulator:clang::7.0
@@ -21,4 +23,5 @@ after-install::
 	install.exec "killall -9 SpringBoard"
 
 SUBPROJECTS += pumaprefs
+SUBPROJECTS += pumacc
 include $(THEOS_MAKE_PATH)/aggregate.mk

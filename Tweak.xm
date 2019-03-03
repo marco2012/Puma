@@ -14,9 +14,8 @@ static BOOL enabled = YES; // Default value
 // http://jontelang.com/guide/chapter3/accessing-settings.html
 static void loadPrefs() {
     NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist"];
-    // if(prefs)
-        // enabled = ( [prefs objectForKey:@"pumaon"] ? [[prefs objectForKey:@"pumaon"] boolValue] : enabled );
-        enabled = [[prefs objectForKey:@"pumaon"] boolValue];
+        enabled = ( [prefs objectForKey:@"pumaon"] ? [[prefs objectForKey:@"pumaon"] boolValue] : enabled );
+        // enabled = [[prefs objectForKey:@"pumaon"] boolValue];
     [prefs release];
 }
 
@@ -122,18 +121,6 @@ static void startPuma(NSString* title, NSString* audio) {
             } else if ([randomAction isEqual:@"belino"]) {
                 startPuma(@"🐯ME NE SBATTO IL BELINO🐯", @"belino");
             } 
- 
-            // if([randomAction isEqual:@"esplodo"]){
-            //     startPuma(@"🐯ESPLODOOO🐯", @"esplodo");
-            // } else if ([randomAction isEqual:@"passi"]) {
-            //     startPuma(@"🐯VADO GIU PERPENDICOLARE🐯", @"passi");
-            // } else if ([randomAction isEqual:@"paura"]) {
-            //     startPuma(@"🐯DIPRE PAURA🐯", @"paura");
-            // } else if ([randomAction isEqual:@"trombare"]) {
-            //     startPuma(@"🐯MA COME FACCIO A NON TROMBARE CO STO FISICO🐯", @"trombare");
-            // } else if ([randomAction isEqual:@"belino"]) {
-            //     startPuma(@"🐯ME NE SBATTO IL BELINO🐯", @"belino");
-            // } 
 
 		});
 	}
