@@ -70,28 +70,36 @@ static void startPuma(NSString* title, NSString* audio) {
     ];
     NSString *randomMessage = [moodArray objectAtIndex:arc4random()%[moodArray count]];
     
-    //display alert
-    UIAlertController* alert=   [UIAlertController
-                                    alertControllerWithTitle: title
-                                    message:randomMessage
-                                    preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* cancel = [UIAlertAction
-                         actionWithTitle:@"💥💥💥"
-                         style:UIAlertActionStyleDefault
-                         handler:^(UIAlertAction * action)
-                         {
-                            //action                             
-                         }];
-    [alert addAction:cancel]; 
-
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil]; //https://www.reddit.com/r/jailbreakdevelopers/comments/5xv9yo/replacing_deprecated_uiactionsheet_with/
-
     //play audio
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat: @"/var/mobile/Library/Puma/%@.aiff", audio]];
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
     audioPlayer.numberOfLoops = 0;
     audioPlayer.volume = 1.0;
     [audioPlayer play];
+
+    //display alert
+    UIAlertController* alert = [UIAlertController
+                                    alertControllerWithTitle: title
+                                    message:randomMessage
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancel = [UIAlertAction
+                                actionWithTitle:@"💥💥💥"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    [audioPlayer stop];                         
+                                }];
+    [alert addAction:cancel]; 
+
+    // //https://stackoverflow.com/questions/2323557/is-it-possible-to-show-an-image-in-uialertview
+    // UIImage *image = [UIImage imageWithContentsOfFile: PASSOIMG ];
+    // CGSize size = image.size;
+    // UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake (100, 200, 100, 100)];
+    // imageView.image = image;
+    // [alert.view addSubview:imageView];
+
+    //https://www.reddit.com/r/jailbreakdevelopers/comments/5xv9yo/replacing_deprecated_uiactionsheet_with/
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil]; 
+
 }
 
 %ctor
@@ -111,15 +119,15 @@ static void startPuma(NSString* title, NSString* audio) {
             NSString *randomAction = [actionArray objectAtIndex:arc4random()%[actionArray count]];
 
             if([randomAction isEqual:@"esplodo"]){
-                startPuma(@"🐯ESPLODOOO🐯", @"esplodo");
+                startPuma(@"🐯ESPLODOOO🐯", randomAction);
             } else if ([randomAction isEqual:@"passi"]) {
-                startPuma(@"🐯VADO GIU PERPENDICOLARE🐯", @"passi");
+                startPuma(@"🐯VADO GIU PERPENDICOLARE🐯", randomAction);
             } else if ([randomAction isEqual:@"paura"]) {
-                startPuma(@"🐯DIPRE PAURA🐯", @"paura");
+                startPuma(@"🐯DIPRE PAURA🐯", randomAction);
             } else if ([randomAction isEqual:@"trombare"]) {
-                startPuma(@"🐯MA COME FACCIO A NON TROMBARE CO STO FISICO🐯", @"trombare");
+                startPuma(@"🐯MA COME FACCIO A NON TROMBARE CO STO FISICO🐯", randomAction);
             } else if ([randomAction isEqual:@"belino"]) {
-                startPuma(@"🐯ME NE SBATTO IL BELINO🐯", @"belino");
+                startPuma(@"🐯ME NE SBATTO IL BELINO🐯", randomAction);
             } 
 
 		});
