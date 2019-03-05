@@ -114,7 +114,8 @@ static void startPuma(NSString* title, NSString* audio) {
                 @"passi", 
                 @"paura", 
                 @"trombare",
-                @"belino"
+                @"belino",
+                @"catafratti"
             ];
             NSString *randomAction = [actionArray objectAtIndex:arc4random()%[actionArray count]];
 
@@ -128,6 +129,8 @@ static void startPuma(NSString* title, NSString* audio) {
                 startPuma(@"🐯MA COME FACCIO A NON TROMBARE CO STO FISICO🐯", randomAction);
             } else if ([randomAction isEqual:@"belino"]) {
                 startPuma(@"🐯ME NE SBATTO IL BELINO🐯", randomAction);
+            }  else if ([randomAction isEqual:@"catafratti"]) {
+                startPuma(@"🐯CATAFRATTI🐯", randomAction);
             } 
 
 		});
