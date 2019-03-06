@@ -18,9 +18,9 @@
   return _selected;
 }
 
-- (void)setSelected:(BOOL)selected
-{
-	_selected = selected;
+- (void)setSelected:(BOOL)selected {
+
+  _selected = selected;
 
   [super refreshState];
 
@@ -28,14 +28,14 @@
     //Your module got selected, do something
     
     NSMutableDictionary *pumaPrefsDict = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist"]];
-  	[pumaPrefsDict setValue:[NSNumber numberWithBool:TRUE] forKey:@"pumaon"];
+  	[pumaPrefsDict setValue:[NSNumber numberWithBool:TRUE] forKey:@"enabled"];
     [pumaPrefsDict writeToFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist" atomically:TRUE];
     
   } else {
     //Your module got unselected, do something
 
     NSMutableDictionary *pumaPrefsDict = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist"]];
-  	[pumaPrefsDict setValue:[NSNumber numberWithBool:FALSE] forKey:@"pumaon"];
+  	[pumaPrefsDict setValue:[NSNumber numberWithBool:FALSE] forKey:@"enabled"];
     [pumaPrefsDict writeToFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist" atomically:TRUE];
   
   }

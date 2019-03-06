@@ -7,14 +7,13 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = puma
 puma_FILES = Tweak.xm
-puma_FRAMEWORKS = UIKit AVFoundation
-# puma_INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries
+puma_FRAMEWORKS = UIKit AVFoundation CoreTelephony AudioToolbox 
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 after-install::
 	install.exec "killall -9 SpringBoard"
 
-# SUBPROJECTS += pumaprefs
+SUBPROJECTS += pumaprefs
 SUBPROJECTS += pumacc
 include $(THEOS_MAKE_PATH)/aggregate.mk

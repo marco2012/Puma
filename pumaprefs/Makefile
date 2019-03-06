@@ -1,9 +1,9 @@
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = pumaprefs
-pumaprefs_FILES = pumaprefsRootListController.m
+pumaprefs_FILES = volbrateRootListController.m volbrateButtonController.m
 pumaprefs_INSTALL_PATH = /Library/PreferenceBundles
-pumaprefs_FRAMEWORKS = UIKit
+pumaprefs_FRAMEWORKS = UIKit CoreGraphics
 pumaprefs_PRIVATE_FRAMEWORKS = Preferences
 
 include $(THEOS_MAKE_PATH)/bundle.mk

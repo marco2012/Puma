@@ -2,30 +2,83 @@
 // http://jontelang.com/guide/chapter3/
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVFoundation.h>   //audio
+#import <AudioToolbox/AudioToolbox.h>   //Vibration
+#import <AudioToolbox/AudioServices.h>
+#import "Headers.h"
+
 #import <notify.h>
 
 #define PASSOIMG @"/var/mobile/Library/Puma/passo.png"
 // static NSString* PUMA_PATH = @"/var/mobile/Library/Puma/passi.aiff";
 
 AVAudioPlayer *audioPlayer;
-static BOOL enabled = YES; // Default value
+static BOOL enabled; // Default value
+static BOOL useHaptic;
+static int forceLevel;
 
-// http://jontelang.com/guide/chapter3/accessing-settings.html
-static void loadPrefs() {
-    NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist"];
-        enabled = ( [prefs objectForKey:@"pumaon"] ? [[prefs objectForKey:@"pumaon"] boolValue] : enabled );
-        // enabled = [[prefs objectForKey:@"pumaon"] boolValue];
-    [prefs release];
+@implementation FeedbackCall
++(void)vibrateDevice {
+	// if(useHaptic) {
+	// 	UIImpactFeedbackGenerator * feedback = [[UIImpactFeedbackGenerator alloc] initWithStyle:forceLevel];
+	// 	[feedback prepare];
+	// 	[feedback impactOccurred];
+	// } if(!useHaptic) {
+	// 	AudioServicesPlaySystemSound(1519);
+	// }
+    if(useHaptic) {
+        AudioServicesPlaySystemSound(forceLevel);
+    }
+}
+@end
+
+//---Test Vibration---//
+void startTestVibration() {
+	// [FeedbackCall vibrateDevice];
+    AudioServicesPlaySystemSound(forceLevel);
 }
 
-// The %ctor thing here is a method which will run when the tweak is loaded, it will only run once (per respring) and is the place we use to register the tweak for listening to our PostNotification
-%ctor 
-{
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("me.vikings.pumaprefs/settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+//---Respring---//
+static void respring() {
+  [[%c(FBSystemService) sharedInstance] exitAndRelaunch:YES];
+}
+
+//---Preferences---//
+static void loadPrefs() {
+	static NSString *file = @"/User/Library/Preferences/me.vikings.pumaprefs.plist";
+	NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:file];
+	if(!preferences) {
+		preferences = [[NSMutableDictionary alloc] init];
+		enabled = YES;
+		useHaptic = YES;
+        forceLevel = 1521;
+		[preferences writeToFile:file atomically:YES];
+	} else {
+		enabled = [[preferences objectForKey:@"enabled"] boolValue];
+		useHaptic = [[preferences objectForKey:@"useHaptic"] boolValue];
+        forceLevel = [[preferences objectForKey:@"forceLevel"] intValue];
+	}
+	[preferences release];
+}
+
+static NSString *nsNotificationString = @"me.vikings.pumaprefs/preferences.changed";
+static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
     loadPrefs();
 }
 
+%ctor {
+	NSAutoreleasePool *pool = [NSAutoreleasePool new];
+	loadPrefs();
+	notificationCallback(NULL, NULL, NULL, NULL, NULL);
+	
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)startTestVibration, CFSTR("me.vikings.puma-testvibration"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+	
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)respring, CFSTR("me.vikings.puma-respring"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+	
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, notificationCallback, (CFStringRef)nsNotificationString, NULL, CFNotificationSuspensionBehaviorCoalesce);
+	
+    [pool release];
+}
 
 @interface UIStatusBarWindow : UIWindow
 -(void)tapping; 
@@ -45,7 +98,7 @@ static void loadPrefs() {
 
 %new // hey lets make a new void 
 -(void)tapping {
-    loadPrefs();
+    // loadPrefs();
     if (enabled) {
         notify_post("me.vikings.puma"); 
     }
@@ -70,6 +123,9 @@ static void startPuma(NSString* title, NSString* audio) {
     ];
     NSString *randomMessage = [moodArray objectAtIndex:arc4random()%[moodArray count]];
     
+    //vibrate
+    AudioServicesPlaySystemSound(forceLevel);
+
     //play audio
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat: @"/var/mobile/Library/Puma/%@.aiff", audio]];
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];

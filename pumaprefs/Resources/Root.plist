@@ -3,23 +3,117 @@
 <plist version="1.0">
 <dict>
 	<key>items</key>
+	
 	<array>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>Puma settings</string>
+			<key>headerCellClass</key>
+			<string>VolbrateCustomHeaderCell</string>
 		</dict>
 		<dict>
-			<key>alignment</key>
-			<integer>1</integer>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Options</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>me.vikings.pumaprefs</string>
+			<key>key</key>
+			<string>enabled</string>
+			<key>label</key>
+			<string>Enabled</string>
+			<key>PostNotification</key>
+			<string>me.vikings.pumaprefs/preferences.changed</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>me.vikings.pumaprefs</string>
+			<key>key</key>
+			<string>useHaptic</string>
+			<key>label</key>
+			<string>Vibrate</string>
+			<key>PostNotification</key>
+			<string>me.vikings.pumaprefs/preferences.changed</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Vibration Strength</string>
+			<key>footerText</key>
+			<string>Strength only applies to Taptic Engine.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>defaults</key>
+			<string>me.vikings.pumaprefs</string>
+			<key>key</key>
+			<string>forceLevel</string>
+			<key>label</key>
+			<string>Vibration</string>
+			<key>default</key>
+			<string>0</string>
+			<key>validTitles</key>
+			<array>
+				<string>Light</string>
+				<string>Medium</string>
+				<string>Heavy</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>1519</string>
+				<string>1520</string>
+				<string>1521</string>
+			</array>
+			<key>id</key>
+			<string>ModeCell</string>
+			<key>PostNotification</key>
+			<string>me.vikings.pumaprefs/preferences.changed</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>sendTestVibtration</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>VolbrateButtonCell</string>
+			<key>label</key>
+			<string>Test Vibration</string>
+		</dict>
+
+		<dict>
+			<key>label</key>
+			<string>Contact</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>Use Control Center toggle to enable/disable</string>
+			<string>Created by marco2012</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>github</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>VolbrateButtonCell</string>
+			<key>icon</key>
+			<string>github.png</string>
+			<key>label</key>
+			<string>Github</string>
 		</dict>
 	</array>
 	<key>title</key>
-	<string>Puma</string>
+	<string></string>
 </dict>
 </plist>
