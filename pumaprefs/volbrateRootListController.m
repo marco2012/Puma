@@ -1,10 +1,10 @@
 		//---Definitions---//
 // #define Switch_Color [UIColor colorWithRed:1.00 green:0.78 blue:0.00 alpha:1.0]
-#define Switch_Color [UIColor colorWithRed:0.25 green:0.76 blue:0.50 alpha:1.0]
+#define Switch_Color [UIColor colorWithRed:1.00 green:0.78 blue:0.00 alpha:1.0]
 // #define Main_Color [UIColor colorWithRed:0.25 green:0.76 blue:0.50 alpha:1.0]
-#define Main_Color [UIColor colorWithRed:0.25 green:0.76 blue:0.50 alpha:1.0]
+#define Main_Color [UIColor colorWithRed:1.00 green:0.78 blue:0.00 alpha:1.0]
 // #define Sec_Color [UIColor colorWithRed:0.58 green:0.91 blue:0.75 alpha:1.0]
-#define Sec_Color [UIColor colorWithRed:0.25 green:0.76 blue:0.50 alpha:1.0]
+#define Sec_Color [UIColor colorWithRed:1.00 green:0.78 blue:0.00 alpha:1.0]
 
 
 #include "volbrateRootListController.h"
