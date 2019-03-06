@@ -86,7 +86,6 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 
 %hook UIStatusBarWindow
 
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = %orig;
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapping)]; //(tapping) will be used as a void down in the %new
@@ -119,12 +118,17 @@ static void startPuma(NSString* title, NSString* audio) {
         @"Ma come faccio a non trombare co sto fisico?!",
         @"Nossa nossa il puma fa la mossa" ,
         @"Ai se ti piego ai ai se ti piego" , 
-        @"Catafratti" 
+        @"Sabatu na trombata" , 
+        @"Catafratti", 
+        @"Mossa se voglio", 
+        @"Quale mossa che non son buono a farla?!", 
+        @"Non sento niente" 
     ];
     NSString *randomMessage = [moodArray objectAtIndex:arc4random()%[moodArray count]];
     
     //vibrate
-    AudioServicesPlaySystemSound(forceLevel);
+    // AudioServicesPlaySystemSound(forceLevel);
+    [FeedbackCall vibrateDevice];
 
     //play audio
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat: @"/var/mobile/Library/Puma/%@.aiff", audio]];
@@ -176,17 +180,17 @@ static void startPuma(NSString* title, NSString* audio) {
             NSString *randomAction = [actionArray objectAtIndex:arc4random()%[actionArray count]];
 
             if([randomAction isEqual:@"esplodo"]){
-                startPuma(@"🐯ESPLODOOO🐯", randomAction);
+                startPuma(@"🐯\nESPLODOOO", randomAction);
             } else if ([randomAction isEqual:@"passi"]) {
-                startPuma(@"🐯VADO GIU PERPENDICOLARE🐯", randomAction);
+                startPuma(@"🐯\nVADO GIU PERPENDICOLARE", randomAction);
             } else if ([randomAction isEqual:@"paura"]) {
-                startPuma(@"🐯DIPRE PAURA🐯", randomAction);
+                startPuma(@"🐯\nDIPRE PAURA", randomAction);
             } else if ([randomAction isEqual:@"trombare"]) {
-                startPuma(@"🐯MA COME FACCIO A NON TROMBARE CO STO FISICO🐯", randomAction);
+                startPuma(@"🐯\nMA COME FACCIO A NON TROMBARE CO STO FISICO", randomAction);
             } else if ([randomAction isEqual:@"belino"]) {
-                startPuma(@"🐯ME NE SBATTO IL BELINO🐯", randomAction);
+                startPuma(@"🐯\nME NE SBATTO IL BELINO", randomAction);
             }  else if ([randomAction isEqual:@"catafratti"]) {
-                startPuma(@"🐯CATAFRATTI🐯", randomAction);
+                startPuma(@"🐯\nCATAFRATTI", randomAction);
             } 
 
 		});

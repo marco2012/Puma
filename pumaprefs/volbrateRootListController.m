@@ -186,6 +186,10 @@
 	}
 
 	-(void)github	{
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/marco2012"] options:@{} completionHandler:nil];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/marco2012/Puma"] options:@{} completionHandler:nil];
+	}
+
+	-(void)youtube {
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://youtu.be/ZzJmG9KYvJo?t=4"] options:@{} completionHandler:nil];
 	}
 @end

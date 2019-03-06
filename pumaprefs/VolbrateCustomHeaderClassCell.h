@@ -37,7 +37,7 @@
             self.subHeaderLabel2 = [[UILabel alloc] initWithFrame:CGRectZero];
             [self.subHeaderLabel2 setNumberOfLines:1];
             [self.subHeaderLabel2 setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
-            [self.subHeaderLabel2 setText:@"by marco2012"];
+            [self.subHeaderLabel2 setText:@""];
             [self.subHeaderLabel2 setBackgroundColor:[UIColor clearColor]];
             // [self.subHeaderLabel2 setTextColor:[UIColor colorWithRed:0.40 green:0.80 blue:0.60 alpha:1.0]];
             [self.subHeaderLabel2 setTextColor:[UIColor colorWithRed:1.00 green:0.89 blue:0.46 alpha:1.0]];
