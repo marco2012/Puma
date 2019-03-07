@@ -5,15 +5,11 @@
 #import <AVFoundation/AVFoundation.h>   //audio
 #import <AudioToolbox/AudioToolbox.h>   //Vibration
 #import <AudioToolbox/AudioServices.h>
+#import <notify.h>
 #import "Headers.h"
 
-#import <notify.h>
-
-#define PASSOIMG @"/var/mobile/Library/Puma/passo.png"
-// static NSString* PUMA_PATH = @"/var/mobile/Library/Puma/passi.aiff";
-
 AVAudioPlayer *audioPlayer;
-static BOOL enabled; // Default value
+static BOOL enabled; 
 static BOOL useHaptic;
 static int forceLevel;
 
@@ -97,7 +93,6 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 
 %new // hey lets make a new void 
 -(void)tapping {
-    // loadPrefs();
     if (enabled) {
         notify_post("me.vikings.puma"); 
     }
@@ -106,7 +101,30 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 
 %end
 
-static void startPuma(NSString* title, NSString* audio) {
+static void startPuma(NSString* randomAction) {
+
+    NSString* title = @"";
+    if([randomAction isEqual:@"esplodo"]){
+        title = @"ESPLODOOO";
+    } else if ([randomAction isEqual:@"passi"]) {
+        title = @"VADO GIU PERPENDICOLARE";
+    } else if ([randomAction isEqual:@"paura"]) {
+        title = @"DIPRE PAURA";
+    } else if ([randomAction isEqual:@"trombare"]) {
+        title = @"MA COME FACCIO A NON TROMBARE CO STO FISICO";
+    } else if ([randomAction isEqual:@"belino"]) {
+        title = @"ME NE SBATTO IL BELINO";
+    }  else if ([randomAction isEqual:@"catafratti"]) {
+        title = @"CATAFRATTI";
+    } else if ([randomAction isEqual:@"mossa_se_voglio"]) {
+        title = @"MOSSA SE VOGLIO";
+    } else if ([randomAction isEqual:@"nossa"]) {
+        title = @"NOSSA NOSSA IL PUMA FA LA MOSSA";
+    } else if ([randomAction isEqual:@"sabatu_na_trombata"]) {
+        title = @"SABATU NA TROMBATA";
+    } else if ([randomAction isEqual:@"baffo_se_voglio"]) {
+        title = @"BAFFO SE VOGLIO";
+    } 
 
     //random message
     NSArray *moodArray = @[
@@ -127,11 +145,10 @@ static void startPuma(NSString* title, NSString* audio) {
     NSString *randomMessage = [moodArray objectAtIndex:arc4random()%[moodArray count]];
     
     //vibrate
-    // AudioServicesPlaySystemSound(forceLevel);
     [FeedbackCall vibrateDevice];
 
     //play audio
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat: @"/var/mobile/Library/Puma/%@.aiff", audio]];
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat: @"/var/mobile/Library/Puma/%@.aiff", randomAction]];
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
     audioPlayer.numberOfLoops = 0;
     audioPlayer.volume = 1.0;
@@ -139,7 +156,7 @@ static void startPuma(NSString* title, NSString* audio) {
 
     //display alert
     UIAlertController* alert = [UIAlertController
-                                    alertControllerWithTitle: title
+                                    alertControllerWithTitle: /*@"🐯\n%@", title*/ [NSString stringWithFormat: @"🐯\n%@", title]
                                     message:randomMessage
                                     preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* cancel = [UIAlertAction
@@ -151,11 +168,7 @@ static void startPuma(NSString* title, NSString* audio) {
     [alert addAction:cancel]; 
 
     // //https://stackoverflow.com/questions/2323557/is-it-possible-to-show-an-image-in-uialertview
-    // UIImage *image = [UIImage imageWithContentsOfFile: PASSOIMG ];
-    // CGSize size = image.size;
-    // UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake (100, 200, 100, 100)];
-    // imageView.image = image;
-    // [alert.view addSubview:imageView];
+    // UIImage *image = [UIImage imageWithContentsOfFile:  @"/var/mobile/Library/Puma/passo.png" ];
 
     //https://www.reddit.com/r/jailbreakdevelopers/comments/5xv9yo/replacing_deprecated_uiactionsheet_with/
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil]; 
@@ -175,23 +188,15 @@ static void startPuma(NSString* title, NSString* audio) {
                 @"paura", 
                 @"trombare",
                 @"belino",
-                @"catafratti"
+                @"catafratti",
+                @"mossa_se_voglio",
+                @"nossa",
+                @"sabatu_na_trombata",
+                @"baffo_se_voglio"
             ];
             NSString *randomAction = [actionArray objectAtIndex:arc4random()%[actionArray count]];
 
-            if([randomAction isEqual:@"esplodo"]){
-                startPuma(@"🐯\nESPLODOOO", randomAction);
-            } else if ([randomAction isEqual:@"passi"]) {
-                startPuma(@"🐯\nVADO GIU PERPENDICOLARE", randomAction);
-            } else if ([randomAction isEqual:@"paura"]) {
-                startPuma(@"🐯\nDIPRE PAURA", randomAction);
-            } else if ([randomAction isEqual:@"trombare"]) {
-                startPuma(@"🐯\nMA COME FACCIO A NON TROMBARE CO STO FISICO", randomAction);
-            } else if ([randomAction isEqual:@"belino"]) {
-                startPuma(@"🐯\nME NE SBATTO IL BELINO", randomAction);
-            }  else if ([randomAction isEqual:@"catafratti"]) {
-                startPuma(@"🐯\nCATAFRATTI", randomAction);
-            } 
+            startPuma(randomAction);
 
 		});
 	}
