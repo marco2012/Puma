@@ -124,6 +124,12 @@ static void startPuma(NSString* randomAction) {
         title = @"SABATU NA TROMBATA";
     } else if ([randomAction isEqual:@"baffo_se_voglio"]) {
         title = @"BAFFO SE VOGLIO";
+    } else if ([randomAction isEqual:@"perpendicolare"]) {
+        title = @"VADO GIÙ PERPENDICOLARE";
+    } else if ([randomAction isEqual:@"se_voglio"]) {
+        title = @"SE VOGLIO";
+    } else if ([randomAction isEqual:@"lucapuma"]) {
+        title = @"LUCAPUMA";
     } 
 
     //random message
@@ -156,7 +162,7 @@ static void startPuma(NSString* randomAction) {
 
     //display alert
     UIAlertController* alert = [UIAlertController
-                                    alertControllerWithTitle: /*@"🐯\n%@", title*/ [NSString stringWithFormat: @"🐯\n%@", title]
+                                    alertControllerWithTitle: [NSString stringWithFormat: @"🐯\n%@", title]
                                     message:randomMessage
                                     preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* cancel = [UIAlertAction
@@ -192,7 +198,10 @@ static void startPuma(NSString* randomAction) {
                 @"mossa_se_voglio",
                 @"nossa",
                 @"sabatu_na_trombata",
-                @"baffo_se_voglio"
+                @"baffo_se_voglio",
+                @"perpendicolare",
+                @"se_voglio",
+                @"lucapuma"
             ];
             NSString *randomAction = [actionArray objectAtIndex:arc4random()%[actionArray count]];
 
