@@ -20,25 +20,22 @@
 
 - (void)setSelected:(BOOL)selected {
 
-  _selected = selected;
-
-  [super refreshState];
-
-  if(_selected){
-    //Your module got selected, do something
-    
-    NSMutableDictionary *pumaPrefsDict = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist"]];
-  	[pumaPrefsDict setValue:[NSNumber numberWithBool:TRUE] forKey:@"enabled"];
-    [pumaPrefsDict writeToFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist" atomically:TRUE];
-    
-  } else {
-    //Your module got unselected, do something
+    _selected = selected;
+    [super refreshState];
 
     NSMutableDictionary *pumaPrefsDict = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist"]];
-  	[pumaPrefsDict setValue:[NSNumber numberWithBool:FALSE] forKey:@"enabled"];
-    [pumaPrefsDict writeToFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist" atomically:TRUE];
-  
-  }
+
+    if(_selected){
+        //Your module got selected, do something
+        [pumaPrefsDict setValue:[NSNumber numberWithBool:TRUE] forKey:@"enabled"];
+    } else {
+        //Your module got unselected, do something
+        [pumaPrefsDict setValue:[NSNumber numberWithBool:FALSE] forKey:@"enabled"];
+    }
+        [pumaPrefsDict writeToFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist" atomically:TRUE];
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), 
+                                            CFSTR("me.vikings.pumaprefs/preferences.changed"), NULL, NULL, TRUE);
+
 }
 
 @end
