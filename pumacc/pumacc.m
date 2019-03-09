@@ -18,12 +18,33 @@
   return _selected;
 }
 
+
+// static void alert(NSString* message) {
+//     UIAlertController* alert = [UIAlertController
+//                                     alertControllerWithTitle: message
+//                                     message:@""
+//                                     preferredStyle:UIAlertControllerStyleAlert];
+//     UIAlertAction* cancel = [UIAlertAction
+//                                 actionWithTitle:@"OK"
+//                                 style:UIAlertActionStyleDefault
+//                                 handler:^(UIAlertAction * action) {
+//                                 }];
+//     [alert addAction:cancel]; 
+//    //https://www.reddit.com/r/jailbreakdevelopers/comments/5xv9yo/replacing_deprecated_uiactionsheet_with/
+//     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil]; 
+// }
+
+
 - (void)setSelected:(BOOL)selected {
 
-    _selected = selected;
-    [super refreshState];
-
     NSMutableDictionary *pumaPrefsDict = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.vikings.pumaprefs.plist"]];
+
+    // BOOL enabled = [[pumaPrefsDict objectForKey:@"enabled"] boolValue];
+    // alert([NSString stringWithFormat: @"selected: %@ \nenabled: %@", selected ? @"YES" : @"NO" , enabled ? @"YES" : @"NO"]);
+    
+    _selected = selected;
+    // _selected = !enabled;
+    [super refreshState];
 
     if(_selected){
         //Your module got selected, do something

@@ -1,9 +1,10 @@
 Package: me.vikings.puma
 Name: Puma
-Depends: mobilesubstrate
+Depends: mobilesubstrate, preferenceloader
+Conflicts: com.lacertosusrepo.volbratexi
 Version: 1.3
 Architecture: iphoneos-arm
-Description: Double tap statusbar clock to experience Puma.
+Description: Double tap statusbar to experience Puma.
 Maintainer: Viking
 Author: Viking
 Section: Tweaks
