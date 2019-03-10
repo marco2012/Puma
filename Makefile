@@ -7,7 +7,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = puma
 puma_FILES = Tweak.xm
-puma_FRAMEWORKS = UIKit AVFoundation CoreTelephony AudioToolbox 
+puma_FRAMEWORKS = UIKit AVFoundation CoreTelephony AudioToolbox
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 

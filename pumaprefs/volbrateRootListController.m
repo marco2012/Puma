@@ -150,7 +150,7 @@
 
 	-(void)resetSettings {
 		UIAlertController * resetAlert = [UIAlertController alertControllerWithTitle:@"Puma"
-																			message:@"Are you sure you want to reset settings? This will also respring your device."
+																			message:@"Do you want to respring?"
 																			preferredStyle:UIAlertControllerStyleAlert];
 		UIAlertAction * confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
 			NSError * error = nil;

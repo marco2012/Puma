@@ -1,6 +1,6 @@
 Package: me.vikings.puma
 Name: Puma
-Depends: mobilesubstrate, preferenceloader
+Depends: mobilesubstrate, preferenceloader, net.limneos.libbulletin
 Conflicts: com.lacertosusrepo.volbratexi
 Version: 1.3
 Architecture: iphoneos-arm
